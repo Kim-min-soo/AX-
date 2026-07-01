@@ -172,6 +172,7 @@
   .story-label{font-size:19px;font-weight:800;letter-spacing:.2px;color:var(--brand);margin-bottom:12px}
   .story-quote{font-size:14px;color:var(--ink-soft);line-height:1.75}
   .story-quote::before{content:"\201C";color:var(--brand);font-size:20px;font-weight:800;margin-right:1px}
+  .story-quote:not(:has(.story-cite))::after{content:"\201D";color:var(--brand);font-size:20px;font-weight:800;margin-left:1px}
   .story-cite{display:block;margin-top:10px;font-size:11px;color:var(--muted)}
   .story-text{font-size:14px;color:var(--ink-soft);line-height:1.75}
   .story-stat{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
@@ -240,7 +241,7 @@
       <div class="narrative-flow" style="margin:0 0 56px">
         <div class="narrative-col">
           <div class="story-label">받은 문제</div>
-          <p class="story-quote">고객사 VoC를 유형별로 분류하고, 탄소규제(CSRD·CBAM) 맥락에서 의미 있는 인사이트를 도출하라.<span class="story-cite">— 리뉴어스랩 미션 원문</span></p>
+          <p class="story-quote">고객사 VoC를 유형별로 분류하고, 탄소규제(CSRD·CBAM) 맥락에서 의미 있는 인사이트를 도출하라.&#8221;<span class="story-cite">— 리뉴어스랩 미션 원문</span></p>
         </div>
         <div class="narrative-arrow">→</div>
         <div class="narrative-col">
