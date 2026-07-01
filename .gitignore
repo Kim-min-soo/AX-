@@ -1,0 +1,12 @@
+# 구글 서비스 계정 키 — 절대 커밋하지 마세요
+credentials.json
+*-credentials.json
+service_account*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# 생성 결과물 (선택적으로 제외)
+# output/

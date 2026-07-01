@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(~/.claude/skills/AX해커톤/**)",
+      "Skill(artifact-design)",
+      "Skill(artifact-design:*)"
+    ]
+  }
+}

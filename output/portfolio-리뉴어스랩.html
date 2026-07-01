@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>리뉴어스랩 — VoC 자동 분류·인사이트 파이프라인</title>
+<style>
+  :root{
+    --brand:#1a4731;      /* Renewers Lab forest green */
+    --brand-dk:#0f2e1e;
+    --brand-soft:#e9f0ea;
+    --mint:#8fd6a8;
+    --ink:#1c2333;
+    --ink-soft:#4b5266;
+    --muted:#767b8a;
+    --paper:#f5f3ec;      /* warm stone paper */
+    --card:#ffffff;
+    --line:#e3ded2;
+    --gold:#b3752c;
+    --gold-soft:#faf1e3;
+    --red:#a83a2d;
+    --red-soft:#fbeeeb;
+    --blue:#1a56a0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#d9d4c4}
+  body{
+    font-family:'Malgun Gothic','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink); line-height:1.6;
+    word-break:keep-all; overflow-wrap:break-word;
+  }
+  strong{color:var(--ink);font-weight:700}
+  p{color:var(--ink-soft);text-wrap:pretty}
+  code.inline{background:#efece2;padding:1px 6px;border-radius:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:#8a3d1f}
+
+  /* ============ SLIDE SHELL ============ */
+  @page{ size: 1280px 720px; margin:0; }
+  .deck{ display:flex; flex-direction:column; align-items:center; gap:28px; padding:28px 0 60px; }
+  .slide{
+    width:1280px; height:720px; flex-shrink:0;
+    background:var(--paper);
+    position:relative; overflow:hidden;
+    padding:56px 76px 64px;
+    box-shadow:0 8px 28px rgba(0,0,0,.18);
+    page-break-after:always; break-after:page;
+  }
+  @media print{
+    html,body{background:#fff}
+    .deck{padding:0;gap:0}
+    .slide{box-shadow:none}
+  }
+
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--brand);margin-bottom:14px;
+  }
+  .kicker .bar{width:18px;height:2px;background:var(--brand);display:inline-block}
+  h1.headline{
+    font-weight:800;color:var(--ink);letter-spacing:-.2px;text-wrap:balance;
+    font-size:32px;line-height:1.35;margin-bottom:10px;max-width:22ch;
+  }
+  .lede{font-size:15px;color:var(--muted);max-width:62ch;margin-bottom:26px;text-wrap:pretty}
+
+  .pagefoot{
+    position:absolute;left:76px;right:76px;bottom:26px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:10.5px;color:#9a9583;letter-spacing:.3px;
+  }
+  .pagefoot .brandmark{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--brand)}
+  .pagefoot .brandmark .dot{width:6px;height:6px;border-radius:50%;background:var(--brand)}
+
+  /* ============ COVER ============ */
+  .slide.cover{ background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dk) 100%); color:#f3f1ea; padding:64px 76px; }
+  .slide.cover::after{content:"";position:absolute;right:-120px;top:-140px;width:440px;height:440px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.08),transparent 68%)}
+  .slide.cover::before{content:"";position:absolute;left:-90px;bottom:-140px;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(143,214,168,.10),transparent 70%)}
+  .cover-eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
+    background:rgba(255,255,255,.14);padding:6px 14px;border-radius:20px;margin-bottom:26px}
+  .cover h1{font-size:42px;line-height:1.4;font-weight:800;letter-spacing:-.3px;text-wrap:balance;
+    max-width:16ch;margin-bottom:18px}
+  .cover-sub{font-size:15.5px;color:#cfe0d4;max-width:46ch;margin-bottom:44px;line-height:1.7;text-wrap:pretty}
+  .cover-sub b{color:#fff}
+  .hero-impact{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:26px 30px;max-width:760px}
+  .hero-impact .n1,.hero-impact .n2{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff}
+  .hero-impact .arrow{font-size:26px;color:var(--mint)}
+  .hero-impact .impact-lbl{font-size:12.5px;color:#bcd4c4;line-height:1.55}
+  .hero-impact .badge{margin-left:auto;background:#fff;color:var(--brand);font-weight:800;font-size:14px;
+    padding:8px 16px;border-radius:20px;align-self:center;white-space:nowrap}
+  .cover-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:34px;font-size:12.5px;color:#a9c2b1}
+  .cover-contact{position:absolute;right:76px;bottom:34px;font-size:12px;color:#bcd4c4;letter-spacing:.2px}
+
+  /* ============ CARDS / GRID ============ */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .card-title{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .split2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .split3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+  blockquote{background:var(--red-soft);border-left:3px solid var(--red);padding:16px 20px;border-radius:0 10px 10px 0;
+    font-size:14.5px;color:#5c1f17;margin-bottom:16px}
+  blockquote.brand{background:var(--brand-soft);border-left-color:var(--brand);color:#20362a}
+  blockquote cite{display:block;margin-top:8px;font-size:11.5px;color:#8a6f68;font-style:normal}
+  blockquote.brand cite{color:#5c7a67}
+
+  .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;border-top:4px solid var(--gold)}
+  .kpi .num{font-size:28px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.1}
+  .kpi .lbl{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+  ul.plain{margin-left:18px}
+  ul.plain li{margin-bottom:7px;font-size:13.5px;color:var(--ink-soft)}
+
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:20px;margin-bottom:10px}
+  .tag.ai{background:#eaf1fb;color:var(--blue)}
+  .tag.human{background:var(--red-soft);color:var(--red)}
+
+  /* ============ FLOW ============ */
+  .flow-steps{display:flex;flex-direction:column}
+  .flow-step{display:flex;gap:16px;align-items:flex-start;padding:9px 0}
+  .flow-step .dot{width:11px;height:11px;border-radius:50%;background:var(--brand);margin-top:6px;flex-shrink:0;
+    box-shadow:0 0 0 4px var(--brand-soft)}
+  .flow-step .txt{font-size:14.5px;color:var(--ink-soft)}
+  .flow-step .txt b{color:var(--ink)}
+  .flow-line{width:2px;background:var(--line);margin-left:5px;height:10px}
+
+  /* ============ DECISION ============ */
+  .decision{background:#fffaf0;border:1px solid #ecd9b4;border-radius:12px;padding:16px 20px}
+  .decision .before{color:#96603a;font-size:12.5px;margin-bottom:7px;font-weight:600}
+  .decision .after{color:#2b3b31;font-size:13.5px;line-height:1.55}
+  .decision .after b{color:var(--brand)}
+
+  /* ============ TABLE ============ */
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{background:#efece2;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+    color:var(--muted);padding:10px 12px;text-align:left;border-bottom:2px solid var(--line);white-space:nowrap}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:none}
+  tbody td b{color:var(--brand)}
+
+  .callout{border:1px dashed #c9a876;background:var(--gold-soft);border-radius:12px;padding:16px 20px;font-size:13px;color:#5c4a26}
+  .callout b{color:#3d2f14}
+
+  .retro-card{border-radius:14px;padding:22px 24px}
+  .retro-card.good{background:var(--brand-soft)}
+  .retro-card.gap{background:#efece2}
+  .retro-card .card-title{opacity:.75}
+  .retro-card.good .card-title{color:var(--brand);opacity:1}
+  .retro-card ul{margin-left:18px}
+  .retro-card li{font-size:13.5px;color:var(--ink-soft);margin-bottom:7px}
+
+  pre.formula{background:#efece2;border-radius:10px;padding:16px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px;line-height:1.85;color:#33362e}
+
+  .num-badge{width:36px;height:36px;border-radius:10px;background:var(--brand-soft);color:var(--brand);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
+
+  /* ============ SUMMARY STORY ROW ============ */
+  .story-row{display:flex;margin:36px 0 30px}
+  .story-col{flex:1;padding:0 30px}
+  .story-col:first-child{padding-left:0}
+  .story-col:last-child{padding-right:0}
+  .story-col:not(:first-child){border-left:1px solid var(--line)}
+  .story-label{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+  .story-quote{font-size:14px;color:var(--ink-soft);line-height:1.75}
+  .story-quote::before{content:"\201C";color:var(--brand);font-size:20px;font-weight:800;margin-right:1px}
+  .story-cite{display:block;margin-top:10px;font-size:11px;color:var(--muted)}
+  .story-text{font-size:14px;color:var(--ink-soft);line-height:1.75}
+  .story-stat{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+  .story-stat b{font-size:32px;font-weight:800;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+  .story-stat span{font-size:12.5px;color:var(--muted)}
+  .story-sub{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+  .demo-row{display:flex;gap:10px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line)}
+  .demo-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft);
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 15px}
+
+  /* ============ PLAIN PAGE TITLE ============ */
+  .page-title{display:flex;align-items:baseline;gap:14px;margin-bottom:28px}
+  .page-title .num{font-size:12.5px;font-weight:800;letter-spacing:.4px;color:#fff;
+    background:var(--brand);padding:4px 11px;border-radius:6px;flex-shrink:0}
+  .page-title .ko{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+  .page-title .en{font-size:13px;font-weight:600;color:var(--muted)}
+  .closing-contact{margin-top:40px;font-size:13px;color:var(--muted);letter-spacing:.2px}
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- ================= SLIDE 1 · COVER ================= -->
+  <div class="slide cover">
+    <span class="cover-eyebrow">Portfolio · AX 해커톤 [01] 리뉴어스랩</span>
+    <h1>쌓이는 VoC,<br>인사이트는 편하게</h1>
+    <p class="cover-sub">CS팀이 매달 손으로 정리하던 VoC를, CSV 한 장으로 분류·인사이트·기획안까지 자동 완성하는 파이프라인</p>
+    <div class="hero-impact">
+      <span class="n1">210분</span><span class="arrow">→</span><span class="n2">20분</span>
+      <span class="impact-lbl">월간 VoC 처리 시간<br>※추정치</span>
+      <span class="badge">약 90% 단축</span>
+    </div>
+    <div class="cover-meta">
+      <span>📄 output/report_voc.html</span>
+      <span>📊 44건 분류 · 긴급 2건 자동 감지</span>
+      <span>🏷 CSRD · CBAM 컨텍스트</span>
+    </div>
+    <div class="cover-contact">김민수 &nbsp;·&nbsp; 010-5646-0905 &nbsp;·&nbsp; msoo5880@gmail.com</div>
+  </div>
+
+  <!-- ================= SLIDE 2 · 01 EXECUTIVE SUMMARY ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">01</span><span class="ko">한 장 요약</span><span class="en">Executive Summary</span></div>
+
+    <div class="story-row">
+      <div class="story-col">
+        <div class="story-label">받은 문제</div>
+        <p class="story-quote">고객사 VoC를 유형별로 분류하고, 탄소규제(CSRD·CBAM) 맥락에서 의미 있는 인사이트를 도출하라.<span class="story-cite">— 리뉴어스랩 미션 원문</span></p>
+      </div>
+      <div class="story-col">
+        <div class="story-label">만든 것</div>
+        <p class="story-text">CSV 한 장만 넣으면 분류·인사이트·개선 기획안·구글시트 기입까지, 사람 개입 없이 끝나는 파이프라인.</p>
+      </div>
+      <div class="story-col">
+        <div class="story-label">핵심 임팩트</div>
+        <div class="story-stat"><b>44건 중 2건</b><span>긴급 자동 감지</span></div>
+        <div class="story-stat"><b>3 + 2</b><span>규제 인사이트 · 개선 기획안</span></div>
+        <p class="story-sub">시간 임팩트(210→20분)는 표지 참조</p>
+      </div>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-pill">📄 분류 리포트 <code class="inline" style="background:none;padding:0;color:inherit">report_voc.html</code></span>
+      <span class="demo-pill">📊 구글스프레드시트 연동 결과</span>
+      <span class="demo-pill">🗂 원본 VoC 데이터 <code class="inline" style="background:none;padding:0;color:inherit">voc.csv</code></span>
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>2</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 3 · 02 문제 이해 ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">02</span><span class="ko">문제 이해</span><span class="en">Understanding the Problem</span></div>
+    <p class="lede" style="margin-bottom:30px">"VoC를 4가지로 나누는 문제"가 아니라, <strong>매달 CS팀장·제품 PM에게 "지금 뭘 해야 하는가"를 전달하는 문제</strong>로 재정의했다.</p>
+
+    <div class="kpi-row" style="margin-bottom:20px">
+      <div class="kpi"><div class="num">150분</div><div class="lbl">건당 분류·입력<br>(30건 × 5분)</div></div>
+      <div class="kpi"><div class="num">60분</div><div class="lbl">월말 집계 +<br>인사이트 도출</div></div>
+      <div class="kpi"><div class="num">210분</div><div class="lbl">CS팀장 1명,<br>월 반나절 소요</div></div>
+    </div>
+
+    <div class="split2">
+      <div class="card">
+        <div class="card-title" style="color:var(--brand)">이번에 푼 것</div>
+        <p style="margin-bottom:0;font-size:13px">CSV 정제 · 4유형+15소분류+5원인태그 분류 · 긴급 건 자동 플래그 · 규제 캘린더 연동 인사이트 · 우선순위 점수 기반 기획안 · 구글시트 자동 기입</p>
+      </div>
+      <div class="card">
+        <div class="card-title">의도적으로 안 푼 것</div>
+        <p style="margin-bottom:0;font-size:13px">채널(이메일·채널톡·미팅) 자동 통합, 실시간 처리, 월별 트렌드 자동 비교 — 다음 스텝으로 명시적으로 미룸</p>
+      </div>
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>3</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 4 · 03 해결 접근 & 의사결정 (흐름) ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">03</span><span class="ko">해결 접근 & 의사결정</span><span class="en">Approach & Decisions</span></div>
+    <p class="lede">"이번 달만 잘 분류"가 아니라 "매달 CSV만 바꿔 끼우면 동일 품질이 나오는 구조"가 목표 — 기준은 <code class="inline">decisions.md</code>에, 코드는 그 문서를 따라간다.</p>
+
+    <div class="flow-steps">
+      <div class="flow-step"><div class="dot"></div><div class="txt"><b>CSV 업로드</b> → 날짜·중복·결측 자동 정리</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="dot"></div><div class="txt">문의 내용을 읽고 <b>4유형(불만/기능요청/칭찬/일반문의) + 세부 원인</b> 분류</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="dot"></div><div class="txt">지금 <b>규제 일정(CBAM 마감 등)</b>과 겹치는 부분이 있는지 자동 대조</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="dot"></div><div class="txt">CS팀·제품팀이 봐야 할 <b>인사이트 3개 + 개선 우선순위 2건</b> 자동 작성</div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><div class="dot" style="background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)"></div><div class="txt"><b>구글시트에 색깔 입혀서 자동 기입</b> (긴급 건은 별도 탭)</div></div>
+    </div>
+
+    <div class="split3" style="margin:16px 0 14px">
+      <div class="card" style="padding:14px 16px">
+        <div class="card-title">4유형</div>
+        <p style="margin-bottom:0;font-size:12.5px">불만 · 기능 요청 · 칭찬 · 일반 문의</p>
+      </div>
+      <div class="card" style="padding:14px 16px">
+        <div class="card-title">15소분류 (예시)</div>
+        <p style="margin-bottom:0;font-size:12.5px">불만 → 시스템오류 / 계산오류 / 기능제한 / 연동오류</p>
+      </div>
+      <div class="card" style="padding:14px 16px">
+        <div class="card-title">5원인태그</div>
+        <p style="margin-bottom:0;font-size:12.5px">규제불안 · 제품결함 · 사용법미숙 · 기한임박 · 원인불명</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>가장 중요했던 지점</b> — 코드를 모르는 CS팀장도 쓸 수 있어야 한다고 판단해 <code class="inline">HOW_TO_USE.md</code> 가이드를 제작. 폴더명의 <code class="inline">[01]</code>이 PowerShell에서 명령 패턴으로 오인되는 문제를 <code class="inline">Set-Location -LiteralPath</code>로 해결했다. <span style="color:#8a7550">(Python + gspread/google-auth 기반 구글시트 자동 기입)</span>
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>4</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 5 · 03 해결 접근 & 의사결정 (판단) ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">03</span><span class="ko">해결 접근 & 의사결정</span><span class="en">Approach & Decisions</span></div>
+    <p class="lede">실제 데이터 앞에서 기준이 무너진 지점을 찾아 교정한 두 가지 결정</p>
+
+    <div class="split2" style="margin-bottom:16px">
+      <div class="decision">
+        <div class="before">❌ 처음 시도 — 기획안 선정 = "불만 건수 1위 + 기능요청 건수 1위"</div>
+        <div class="after">→ 실제로 급한 것(OEM 시스템 오류, 2건)보다 <b>건수만 많은 것(4건)</b>이 뽑히는 역설 발견. 건수·OEM 여부·긴급 여부·결함 여부를 합산한 <b>점수제</b>로 교체.
+          <code class="inline" style="display:inline-block;margin-top:6px">점수 = 빈도(≤5) + OEM(+3) + URGENT(+3) + 결함(+2) + 규제불안(+1)</code>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="before">❌ 처음 시도 — "불만이냐 문의냐"만 보면 긴급도 판단 가능</div>
+        <div class="after">→ "CBAM 신고 마감을 놓친 문의"는 유형상 일반 문의지만 대응 속도는 불만보다 급함. <b>유형 분류와 긴급도를 별도 두 축</b>으로 분리.</div>
+      </div>
+    </div>
+
+    <div class="split2">
+      <div class="card">
+        <span class="tag ai">AI(Claude)에게 맡긴 것</span>
+        <p style="margin-bottom:0;font-size:13.5px">44건 각각을 읽고 초기 유형·소분류를 판단하는 반복 작업, 규제 캘린더와 VoC 패턴을 대조한 인사이트 초안 작성</p>
+      </div>
+      <div class="card">
+        <span class="tag human">내가 직접 결정한 것</span>
+        <p style="margin-bottom:0;font-size:13.5px">4유형 판단 기준 자체, 기획안 선정 점수제 전환, 긴급도·유형 분리, 비기술직도 쓸 수 있는 실행 형태 설계</p>
+      </div>
+    </div>
+
+    <p style="margin:14px 0 0;font-size:12.5px;color:var(--muted)">분류 원칙 — 기존 것을 고쳐달라 = 불만 · 없는 것을 새로 만들어달라 = 기능 요청 <span style="color:#b9b3a3">(decisions.md D-04~D-10)</span></p>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>5</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 6 · 04 산출물 & 실증 ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">04</span><span class="ko">산출물 & 실증</span><span class="en">Deliverables</span></div>
+    <p class="lede">사람이 매번 새로 만들던 산출물이, 실행 한 번으로 동일한 품질로 나온다.</p>
+
+    <table style="margin-bottom:22px">
+      <thead><tr><th>산출물</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><code class="inline">report_voc.html</code></td><td>긴급 알림 → 통계 카드 → 유형 분포 → 전체 분류표 → 인사이트 3개 → 개선 기획안 2개</td></tr>
+        <tr><td>구글시트 연동</td><td>분류결과 / 집계요약 / URGENT 3개 탭 자동 기입, 유형별 색상 표시</td></tr>
+        <tr><td>원본 데이터</td><td>voc.csv (44건, 첨부)</td></tr>
+      </tbody>
+    </table>
+
+    <p class="card-title" style="margin-bottom:10px">실제 동작 1건 · 2026-05-11</p>
+    <blockquote class="brand" style="margin-bottom:14px">
+      카본링크에서 출력한 CBAM 보고서가 EU 세관에서 반려됐습니다. 양식 문제인지 수치 문제인지 확인 부탁드립니다. 긴급합니다.
+      <cite>— OEM 고객, 이메일</cite>
+    </blockquote>
+    <div class="card" style="border-color:#eec5bd;background:var(--red-soft)">
+      <div class="card-title" style="color:var(--red)">자동 출력</div>
+      <p style="margin-bottom:0;font-size:13.5px"><strong>불만 → 시스템오류 → 원인태그: 제품결함 → 긴급 플래그(Y)</strong> → 구글시트 URGENT 탭 자동 분리 → CS팀 당일 에스컬레이션 대상으로 리포트 최상단 노출</p>
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>6</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 7 · 05 임팩트 ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">05</span><span class="ko">임팩트</span><span class="en">Impact</span></div>
+
+    <table style="margin-bottom:16px">
+      <thead><tr><th>핵심 지표</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+        <tr><td>월간 VoC 처리 시간</td><td>210분</td><td><b>약 20분</b></td></tr>
+        <tr><td>긴급 건 파악</td><td>44건 전부 읽어야 확인</td><td><b>자동 플래그로 즉시 노출</b></td></tr>
+        <tr><td>인사이트 도출</td><td>수작업 재구성, 근거 비체계적</td><td><b>규제 캘린더 대조 기반 자동 생성</b></td></tr>
+      </tbody>
+    </table>
+
+    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
+      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">9 · 20.5%</div><div class="lbl">불만</div></div>
+      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">12 · 27.3%</div><div class="lbl">기능 요청</div></div>
+      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">8 · 18.2%</div><div class="lbl">칭찬</div></div>
+      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">15 · 34.1%</div><div class="lbl">일반 문의</div></div>
+    </div>
+
+    <div class="split3" style="margin-bottom:14px">
+      <div class="retro-card good">
+        <div class="card-title">CS팀장</div>
+        <ul><li>"이번 달 뭐가 급한지"를 44건을 다 읽지 않고도 리포트 최상단에서 즉시 파악</li></ul>
+      </div>
+      <div class="retro-card good">
+        <div class="card-title">제품 PM</div>
+        <ul><li>건수가 아니라 OEM·긴급도·결함 여부를 반영한 우선순위 점수로 스프린트 후보를 받는다</li></ul>
+      </div>
+      <div class="retro-card good">
+        <div class="card-title">다음 담당자</div>
+        <ul><li>분류·경계 케이스 판단 근거가 문서로 누적되어, 담당자가 바뀌어도 그대로 이어받는다</li></ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>측정 방식 명시</b> — 210분→20분은 실측 타임로그가 아닌 <strong>추정치</strong>다. voc.csv 건수와 VoC 처리 실무를 근거로 단계별 역산했으며, 자동화 이후에도 "리포트 검토 15분"은 그대로 남겨 과장을 피했다. 실제 배포 시 CS팀 실측값으로 갱신 필요.
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>7</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 8 · 06 적용 가능성 & 아쉬움 & 비전 ================= -->
+  <div class="slide">
+    <div class="page-title"><span class="num">06</span><span class="ko">적용 가능성 & 아쉬움 & 비전</span><span class="en">Applicability & Retrospective</span></div>
+
+    <div class="split2" style="margin-bottom:16px">
+      <div class="retro-card good">
+        <div class="card-title">적용 시 필요한 것</div>
+        <ul>
+          <li>매달 CS팀이 이메일·채널톡·미팅메모를 하나의 CSV로 정리하는 습관</li>
+          <li>구글 스프레드시트 서비스 계정 공유 설정 (최초 1회)</li>
+          <li>규제 일정 변경 시 <code class="inline">reg-calendar.md</code> 업데이트 (PM)</li>
+        </ul>
+      </div>
+      <div class="retro-card gap">
+        <div class="card-title">아쉬운 점</div>
+        <ul>
+          <li>핵심 임팩트 수치(210→20분)가 실측이 아닌 추정치</li>
+          <li>새 소분류·긴급 표현은 사람이 수동 업데이트 — 완전 자동화가 아닌 반자동화</li>
+          <li>월별 트렌드 비교는 미지원 — 현재는 단일 기간 스냅샷까지</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">다음 스텝</div>
+      <p style="margin-bottom:0;font-size:13.5px">CS팀 실측 데이터로 임팩트 수치 검증 → 월별 CSV 누적으로 트렌드 비교 인사이트 추가 → 규제 캘린더 변경 알림 자동화</p>
+    </div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>8</span>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE 9 · 07 마무리 ================= -->
+  <div class="slide" style="display:flex;flex-direction:column;justify-content:center">
+    <div class="page-title"><span class="num">07</span><span class="ko">마무리</span><span class="en">Closing</span></div>
+
+    <blockquote class="brand" style="font-size:15px;line-height:1.8;max-width:74ch;margin-bottom:20px">
+      이 파이프라인을 정식으로 맡게 된다면, 지금은 월 단위 스냅샷으로 멈춰 있는 분석을 트렌드 비교까지 확장하고 CS팀 실측 데이터로 임팩트 수치를 검증된 값으로 바꿔나가고 싶다.
+    </blockquote>
+
+    <p style="font-size:14px;max-width:72ch;line-height:1.85;margin-bottom:0">
+      이전에 무신사 리뷰 데이터로 고객 VoC를 유형별로 분석해본 경험 덕분에, 이 문제를 비교적 빠르게 풀 수 있었다. "고객의 말을 몇 가지 기준으로 나누는 것"보다 "그 기준이 흔들리는 경계 케이스를 어떻게 처리할지 원칙을 세우는 것"이 VoC 분석의 진짜 난이도라는 걸 그 경험에서 미리 알고 있었고, 그래서 이번에도 분류 기준과 경계 케이스 처리 원칙을 문서로 먼저 고정하는 데 시간을 많이 썼다.
+    </p>
+
+    <div class="closing-contact">감사합니다 &nbsp;·&nbsp; 김민수 &nbsp;·&nbsp; 010-5646-0905 &nbsp;·&nbsp; msoo5880@gmail.com</div>
+
+    <div class="pagefoot">
+      <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
+      <span>9</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김민수 해커톤 발표자료</title>
+<style>
+  :root{ --font-family:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;font-family:var(--font-family);background:#F1F1F3;-webkit-font-smoothing:antialiased;}
+  .deck{display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 16px;}
+  .frame{width:min(1180px,100%);overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.10);}
+  .scale{transform-origin:top left;}
+  .slide{width:1920px;height:1080px;overflow:hidden;}
+  @media print{
+    html,body{background:#fff;}
+    .deck{gap:0;padding:0;}
+    .frame{width:1123px;box-shadow:none;height:632px!important;break-after:page;page-break-after:always;}
+    .scale{transform:scale(.5849)!important;}
+    @page{size:A4 landscape;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ========== 0. 표지 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:96px 112px;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:14px;flex:none">
+    <span style="width:14px;height:14px;background:#FA0030;border-radius:3px;display:inline-block"></span>
+    <span style="font-size:24px;font-weight:700;letter-spacing:0.28em;color:#FA0030">AX HACKATHON 2026</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <p style="font-size:30px;font-weight:500;color:#A4A7B0;margin:0 0 20px">리뉴어스랩 문제</p>
+    <h1 style="font-size:88px;line-height:1.14;font-weight:800;letter-spacing:-0.02em;color:#0D0E11;margin:0;text-wrap:balance">쏟아지는 VoC,<br>이제는 자동으로 정리된다</h1>
+    <p style="font-size:32px;font-weight:600;color:#FA0030;margin:32px 0 0">김민수 · 데이터 분석 / PM / 마케터</p>
+  </div>
+  <div style="flex:none;border-top:1px solid #E7E8EB;padding-top:28px;display:flex;justify-content:space-between;align-items:center">
+    <span style="font-size:20px;font-weight:500;color:#A4A7B0">2026.07.01 &nbsp;·&nbsp; 팀스파르타 AX 해커톤</span>
+    <span style="font-size:20px;font-weight:600;color:#666874">msoo5880@gmail.com &nbsp;·&nbsp; 010-5646-0905</span>
+  </div>
+</section></div></div>
+
+<!-- ========== 1. 한 장 요약 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:44px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">EXECUTIVE SUMMARY</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">한 장 요약</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="padding:28px 32px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px">
+        <div style="font-size:18px;font-weight:700;letter-spacing:0.12em;color:#A4A7B0;margin-bottom:12px">받은 문제 (원문)</div>
+        <p style="font-size:24px;font-weight:500;line-height:1.6;color:#40414B;margin:0">고객사로부터 수집된 VoC CSV 데이터를 분석하여, 유형별(불만·기능 요청·칭찬·일반 문의) 분류표를 만들고 탄소규제(CSRD·CBAM) 맥락에서 비즈니스 의미 있는 인사이트 3개를 도출하라.</p>
+      </div>
+      <div style="padding:28px 32px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px">
+        <div style="font-size:18px;font-weight:700;letter-spacing:0.12em;color:#A4A7B0;margin-bottom:12px">만든 것</div>
+        <p style="font-size:26px;font-weight:600;line-height:1.5;color:#0D0E11;margin:0">CSV 한 장만 넣으면 정제→분류→규제맥락 인사이트→기획안→구글시트 기입까지 끝나는 VoC 자동 분류·인사이트 파이프라인</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="flex:1;background:#FFF7FC;border:2px solid #FFE0ED;border-radius:14px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+        <div style="font-size:20px;font-weight:700;color:#D80028;margin-bottom:10px">핵심 임팩트</div>
+        <div style="font-size:76px;font-weight:800;color:#FA0030;line-height:1.0">210분→20분</div>
+        <div style="font-size:24px;font-weight:600;color:#D80028;margin-top:10px">월간 VoC 처리 시간 약 90% 단축 (추정치)</div>
+      </div>
+      <div style="padding:24px 28px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;display:flex;align-items:center;gap:18px">
+        <span style="font-size:40px;flex:none">▶</span>
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#0D0E11;margin-bottom:6px">데모</div>
+          <a href="file:///C:/Users/Minsoo/.claude/skills/AX%ED%95%B4%EC%BB%A4%ED%86%A4/[01]%20%EB%A6%AC%EB%89%B4%EC%96%B4%EC%8A%A4%EB%9E%A9/output/report_voc.html" style="font-size:21px;font-weight:600;color:#FA0030;word-break:break-all;text-decoration:none">분류 리포트 열기</a> ·
+          <a href="https://docs.google.com/spreadsheets/d/1PCUbNBXRvvaItiVaE24RscyuX3f7Frzye5SBkxNGiD4/edit?gid=1415751132#gid=1415751132" style="font-size:21px;font-weight:600;color:#FA0030;word-break:break-all;text-decoration:none">구글시트 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 2. 문제 이해 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">PROBLEM DEFINITION</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">문제 이해</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px;min-height:0">
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;letter-spacing:0.12em;color:#A4A7B0;margin-bottom:14px">기업 원문 문제</div>
+      <p style="font-size:23px;font-weight:500;line-height:1.6;color:#40414B;margin:0">탄소규제 컨설팅 특성상 VoC는 이메일·채널톡·설문·미팅 등 다양한 채널로 산발적으로 들어온다. CBAM 확정 시행(2026.1), CSRD 적용 확대와 맞물려 문의·불만이 급증. CS팀은 수작업으로 엑셀 정리 중이라 패턴 파악이 어렵고 의사결정에 활용하지 못함.</p>
+    </div>
+    <div style="background:#FFF7FC;border:2px solid #FFE0ED;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;letter-spacing:0.12em;color:#FA0030;margin-bottom:14px">내가 재정의한 문제</div>
+      <p style="font-size:23px;font-weight:500;line-height:1.6;color:#0D0E11;margin:0">"이번 달 VoC를 잘 분류하는 문제"가 아니라, 매달 반복해서 CS팀장·제품 PM에게 "지금 뭘 해야 하는가"를 전달하는 문제. 매달 CSV만 바꿔 끼우면 동일 품질의 판단 자료가 나오는 구조가 목표.</p>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;letter-spacing:0.12em;color:#A4A7B0;margin-bottom:14px">문제의 크기 (Before)</div>
+      <p style="font-size:23px;font-weight:500;line-height:1.6;color:#40414B;margin:0">월평균 약 30건을 사람이 하나씩 읽고 판단·입력(150분) + 월말 집계·인사이트 도출(60분) = 합계 210분/월. CS팀장 1명이 한 달에 반나절을 VoC 정리에만 소모.</p>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;letter-spacing:0.12em;color:#A4A7B0;margin-bottom:14px">스코프 — 푼 것 / 안 푼 것</div>
+      <p style="font-size:23px;font-weight:500;line-height:1.6;color:#40414B;margin:0">O: CSV 정제, 4유형+15소분류+5원인태그 분류, 긴급 플래그, 규제 캘린더 연동 인사이트 3개, 우선순위 점수 기획안, 구글시트 자동 기입. X: 이메일·채널톡·미팅메모 자동 통합, 실시간 처리, 월별 트렌드 자동 비교.</p>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 3. 해결 접근 & 의사결정 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">APPROACH &amp; DECISION</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">해결 접근 &amp; 의사결정</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="padding:24px 28px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px">
+        <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">접근 가설 / 핵심 흐름</div>
+        <p style="font-size:22px;font-weight:500;line-height:1.6;color:#40414B;margin:0">"이번 달 잘 분류하는 것"보다 "다음 달도 같은 품질이 나오는 것"이 더 큰 가치라 판단. 분류 기준을 문서(decisions.md)에 먼저 고정하고 코드가 그 문서를 그대로 따르게 함.<br>CSV 업로드 → 정제 → 4유형+원인 분류 → 규제 일정 대조 → 인사이트·기획안 자동 작성 → 구글시트 색깔 기입</p>
+      </div>
+      <div style="padding:24px 28px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px">
+        <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">버린 대안 &amp; 이유</div>
+        <p style="font-size:22px;font-weight:500;line-height:1.6;color:#40414B;margin:0">기획안 선정을 "건수 1위"로 고정하려 했으나, 급한 것(OEM 시스템 오류 2건)보다 단순 다건 요청(4건)이 뽑히는 역설 발견 → 건수·OEM 여부·긴급 여부·제품결함 여부를 합산한 점수제로 전환. 유형 분류와 긴급도도 같은 축으로 보려 했으나 "CBAM 마감을 놓친 일반 문의"처럼 유형은 낮아도 대응은 급한 사례 발견 → 두 축으로 분리.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="padding:24px 28px;background:#FFF7FC;border:2px solid #FFE0ED;border-radius:14px;flex:1.4">
+        <div style="font-size:17px;font-weight:700;color:#FA0030;margin-bottom:12px">★ 막혔던 지점 &amp; 돌파 방법</div>
+        <p style="font-size:22px;font-weight:500;line-height:1.6;color:#0D0E11;margin:0">분류 로직보다 "실제로 CS팀장이 매달 쓸 수 있는가"가 더 큰 걱정이었다. 테스트 중 프로젝트 폴더명에 대괄호(예: [01])가 있으면 윈도우 터미널이 이를 명령 패턴으로 잘못 해석해 "경로를 찾을 수 없다" 오류가 발생 — 비기술직 사용자는 이 메시지만 보고는 무엇을 고쳐야 할지 알 수 없는 상황이었다. 원인을 찾아 폴더명을 있는 그대로 읽는 명령으로 바꿔 해결하고, 복사·붙여넣기만 하면 되는 실행 가이드(HOW_TO_USE.md)에 굵게 강조해뒀다.</p>
+      </div>
+      <div style="padding:24px 28px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px">
+        <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">AI vs 내 판단</div>
+        <p style="font-size:22px;font-weight:500;line-height:1.6;color:#40414B;margin:0">AI: 44건 각각의 내용을 읽고 초기 유형·소분류 판단, 규제 캘린더 대조 인사이트 초안 작성.<br>내 판단: 4유형 판단 기준 자체, 기획안을 점수제로 바꾼 결정, 긴급도·유형을 분리한 결정, 비기술직도 실행 가능한 형태로 만든 결정.</p>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 4. 산출물 & 실증 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">OUTPUT &amp; DEMO</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">산출물 &amp; 실증</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="flex:1;background:#F1F1F3;border-radius:14px;display:flex;align-items:center;justify-content:center;min-height:300px;position:relative">
+        <div style="text-align:center;color:#A4A7B0">
+          <div style="font-size:60px;margin-bottom:10px">▶</div>
+          <div style="font-size:26px;font-weight:700;margin-bottom:8px">데모 영상 / GIF</div>
+          <div style="font-size:20px;font-weight:500">report_voc.html 리포트 &amp; 구글시트 연동 스크린샷 삽입 예정</div>
+        </div>
+      </div>
+      <div style="padding:20px 26px;background:#F9F9FA;border:1px solid #E7E8EB;border-radius:12px;display:flex;align-items:center;gap:16px">
+        <span style="font-size:20px;font-weight:700;color:#0D0E11;flex:none">데모 링크</span>
+        <a href="file:///C:/Users/Minsoo/.claude/skills/AX%ED%95%B4%EC%BB%A4%ED%86%A4/[01]%20%EB%A6%AC%EB%89%B4%EC%96%B4%EC%8A%A4%EB%9E%A9/output/report_voc.html" style="font-size:21px;font-weight:600;color:#FA0030;text-decoration:none;word-break:break-all">분류 리포트</a> ·
+        <a href="https://docs.google.com/spreadsheets/d/1PCUbNBXRvvaItiVaE24RscyuX3f7Frzye5SBkxNGiD4/edit?gid=1415751132#gid=1415751132" style="font-size:21px;font-weight:600;color:#FA0030;text-decoration:none;word-break:break-all">구글시트</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:10px;height:10px;background:#FA0030;border-radius:2px;display:inline-block"></span><span style="font-size:24px;font-weight:700;color:#0D0E11">실제 동작 한 사이클</span></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:14px;align-items:flex-start"><span style="background:#FA0030;color:#fff;font-size:15px;font-weight:700;padding:5px 12px;border-radius:6px;flex:none;margin-top:2px">입력</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">"카본링크에서 출력한 CBAM 보고서가 EU 세관에서 반려됐습니다. 긴급합니다." (OEM 고객, 이메일)</p></div>
+        <div style="display:flex;gap:14px;align-items:flex-start"><span style="background:#D80028;color:#fff;font-size:15px;font-weight:700;padding:5px 12px;border-radius:6px;flex:none;margin-top:2px">처리</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">불만 → 시스템오류 → 원인태그 제품결함으로 자동 분류, "반려·긴급" 표현을 인식해 긴급 플래그 자동 부여</p></div>
+        <div style="display:flex;gap:14px;align-items:flex-start"><span style="background:#40414B;color:#fff;font-size:15px;font-weight:700;padding:5px 12px;border-radius:6px;flex:none;margin-top:2px">결과</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">구글시트 URGENT 탭에 자동 분리·강조 표시 → CS팀 당일 에스컬레이션 대상으로 리포트 최상단에 노출</p></div>
+      </div>
+      <div style="margin-top:24px;padding:20px 24px;background:#FFF7FC;border:1px solid #FFE0ED;border-radius:12px">
+        <p style="font-size:20px;font-weight:500;line-height:1.6;color:#40414B;margin:0"><span style="color:#FA0030;font-weight:700">핵심: </span>사람이 44건을 하나씩 읽으며 "이건 급한가"를 판단하던 일을, 이 파이프라인은 문의 속 표현(마감·반려·긴급 등)을 보고 자동으로 골라내 CS팀장 눈앞에 먼저 보여준다.</p>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 5. 임팩트 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">IMPACT</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">임팩트</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;min-height:0">
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><span style="width:10px;height:10px;background:#FA0030;border-radius:2px;display:inline-block"></span><span style="font-size:24px;font-weight:700;color:#0D0E11">Before / After</span></div>
+      <table style="width:100%;border-collapse:collapse;font-size:23px">
+        <thead>
+          <tr style="background:#0D0E11;color:#fff">
+            <th style="padding:14px 18px;text-align:left;font-weight:700;border-radius:10px 0 0 0">핵심 지표</th>
+            <th style="padding:14px 18px;text-align:center;font-weight:700">Before</th>
+            <th style="padding:14px 18px;text-align:center;font-weight:700;border-radius:0 10px 0 0;color:#FA0030">After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #E7E8EB">
+            <td style="padding:16px 18px;font-weight:600;color:#40414B">월간 VoC 처리 시간</td>
+            <td style="padding:16px 18px;text-align:center;color:#A4A7B0;font-weight:600">210분/월</td>
+            <td style="padding:16px 18px;text-align:center;color:#FA0030;font-weight:800">약 20분/월</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E7E8EB">
+            <td style="padding:16px 18px;font-weight:600;color:#40414B">긴급 건 파악</td>
+            <td style="padding:16px 18px;text-align:center;color:#A4A7B0;font-weight:600">44건 다 읽어야 확인</td>
+            <td style="padding:16px 18px;text-align:center;color:#FA0030;font-weight:800">자동 플래그 2건 즉시 노출</td>
+          </tr>
+          <tr>
+            <td style="padding:16px 18px;font-weight:600;color:#40414B">인사이트 도출</td>
+            <td style="padding:16px 18px;text-align:center;color:#A4A7B0;font-weight:600">수작업 재구성, 근거 비체계적</td>
+            <td style="padding:16px 18px;text-align:center;color:#FA0030;font-weight:800">규제 캘린더 대조 3개 자동 생성</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:17px;font-weight:500;color:#A4A7B0;margin:12px 0 0">* 위 시간 수치는 CS팀 실측이 아닌 추정치. voc.csv 건수와 컨설팅 업계 VoC 처리 실무를 근거로 단계별 역산(취합·판단·입력 시간 합산). 실제 배포 시 CS팀 실측값으로 갱신 필요.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="width:10px;height:10px;background:#FA0030;border-radius:2px;display:inline-block"></span><span style="font-size:24px;font-weight:700;color:#0D0E11">정성 효과</span></div>
+      <div style="display:flex;gap:14px;align-items:flex-start"><span style="color:#FA0030;font-size:22px;font-weight:800;flex:none">✓</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">CS팀장이 44건을 다 읽지 않고도 "이번 달 뭐가 급한지"를 리포트 최상단에서 바로 파악</p></div>
+      <div style="display:flex;gap:14px;align-items:flex-start"><span style="color:#FA0030;font-size:22px;font-weight:800;flex:none">✓</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">제품 PM은 건수가 아니라 OEM·긴급도·제품결함을 반영한 우선순위 점수로 다음 스프린트 후보를 받음</p></div>
+      <div style="display:flex;gap:14px;align-items:flex-start"><span style="color:#FA0030;font-size:22px;font-weight:800;flex:none">✓</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">분류 기준·경계 케이스 판단 근거가 문서로 누적되어 담당자가 바뀌어도 그대로 이어받을 수 있음</p></div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 6. 적용 가능성 & 아쉬움 & 비전 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#FA0030">APPLICABILITY &amp; REFLECTION</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">적용 가능성 &amp; 아쉬움 &amp; 비전</h2>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;min-height:0">
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:20px;letter-spacing:0.08em">우리 환경 적용 시</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#40414B;font-size:20px;font-weight:800;flex:none">·</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">매달 CS팀이 이메일·채널톡·미팅메모를 하나의 CSV로 정리하는 최소 습관</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#40414B;font-size:20px;font-weight:800;flex:none">·</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">구글 스프레드시트 서비스 계정 공유 설정(최초 1회), 규제 일정 변경 시 reg-calendar.md 업데이트(PM)</p></div>
+      </div>
+    </div>
+    <div style="background:#FFF7FC;border:2px solid #FFE0ED;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;color:#FA0030;margin-bottom:20px;letter-spacing:0.08em">솔직한 아쉬움</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#FA0030;font-size:20px;font-weight:800;flex:none">·</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">핵심 임팩트 수치(210분→20분)가 실측이 아닌 추정치. CS팀 실제 작업 시간을 재보지 못한 한계</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#FA0030;font-size:20px;font-weight:800;flex:none">·</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">새 소분류·긴급 표현이 등장하면 자동 학습되지 않고 사람이 수동 업데이트해야 함. 완전 자동화보다 반자동화에 가까움</p></div>
+      </div>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:28px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:20px;letter-spacing:0.08em">2주 더 준다면</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#FA0030;font-size:20px;font-weight:800;flex:none">→</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">CS팀 실측 타임로그로 210분→20분 추정치를 실측값으로 교체</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#FA0030;font-size:20px;font-weight:800;flex:none">→</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">월별 classified_voc CSV를 누적 저장해 "지난달 대비 이번 달" 트렌드 인사이트 추가</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#FA0030;font-size:20px;font-weight:800;flex:none">→</span><p style="font-size:22px;font-weight:500;line-height:1.55;color:#40414B;margin:0">규제 캘린더 변경 시점 알림 자동화까지 확장 가능</p></div>
+      </div>
+    </div>
+  </div>
+</section></div></div>
+
+<!-- ========== 7. 마무리 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="position:relative;font-family:var(--font-family);background:#1D1E23;color:#FFFFFF;padding:96px 112px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px"><span style="width:14px;height:14px;background:#FA0030;border-radius:3px;display:inline-block"></span><span style="font-size:24px;font-weight:700;letter-spacing:0.28em;color:#FA0030">CLOSING</span></div>
+  <h1 style="font-size:96px;font-weight:800;letter-spacing:-0.02em;margin:0 0 32px;line-height:1.05">이 문제, 계속 맡고 싶습니다</h1>
+  <p style="font-size:28px;font-weight:500;color:#BDC0C7;margin:0 0 18px;max-width:1300px;line-height:1.65">정식 합류 시, 지금은 월 단위 스냅샷으로 멈춰 있는 분석을 트렌드 비교까지 확장하고 CS팀 실측 데이터로 임팩트 수치를 검증된 값으로 바꿔나갈 수 있습니다.</p>
+  <p style="font-size:26px;font-weight:500;color:#858893;margin:0;max-width:1300px;line-height:1.65">이전에 무신사 리뷰 데이터로 고객 VoC를 유형별로 분석해본 경험이 있어, 분류 기준과 경계 케이스 처리 원칙을 먼저 문서로 고정하는 접근이 이번 결과물로 이어졌습니다.</p>
+  <div style="font-size:24px;font-weight:600;color:#FFFFFF;margin-top:52px">msoo5880@yu.ac.kr &nbsp;·&nbsp; 010-5646-0905</div>
+  <div style="position:absolute;bottom:56px;font-size:18px;font-weight:500;color:#666874">2026.07.01 &nbsp;·&nbsp; 팀스파르타 AX 해커톤 &nbsp;·&nbsp; 김민수</div>
+</section></div></div>
+
+<!-- ========== (별첨) 기술 & 논리 상세 ========== -->
+<div class="frame"><div class="scale"><section class="slide" style="font-family:var(--font-family);background:#FFFFFF;color:#0D0E11;padding:80px 112px;display:flex;flex-direction:column">
+  <div style="flex:none;margin-bottom:36px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="width:12px;height:12px;background:#A4A7B0;border-radius:3px;display:inline-block"></span><span style="font-size:22px;font-weight:700;letter-spacing:0.2em;color:#A4A7B0">APPENDIX</span></div>
+    <h2 style="font-size:54px;line-height:1.1;font-weight:700;color:#0D0E11;margin:0">(별첨) 기술 &amp; 논리 상세</h2>
+    <p style="font-size:22px;font-weight:500;color:#A4A7B0;margin:12px 0 0">기술 검증을 원하는 담당자만 여기로 — 본문은 비즈니스 언어로만</p>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px;min-height:0">
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:26px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">워크플로우 구조 / 파이프라인</div>
+      <p style="font-size:21px;font-weight:500;line-height:1.6;color:#40414B;margin:0">CSV 업로드 → 날짜·중복·결측 자동 정리 → 4유형+15소분류+5원인태그 분류 → 규제 일정(CBAM 마감 등) 자동 대조 → 인사이트 3개·개선 우선순위 2건 자동 작성 → 구글시트 색상 자동 기입(긴급 건 별도 탭)</p>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:26px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">사용 도구 &amp; 주요 노드</div>
+      <p style="font-size:21px;font-weight:500;line-height:1.6;color:#40414B;margin:0">Python 파이프라인(classify_voc.py) + Claude(반복 분류·인사이트 초안) + gspread/google-auth(Service Account 인증) 기반 구글시트 자동 기입(sheets_sync.py)</p>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:26px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">데이터 처리 과정</div>
+      <p style="font-size:21px;font-weight:500;line-height:1.6;color:#40414B;margin:0">입력: voc.csv(44건) → 정제(날짜·중복·결측) → 4유형/15소분류/5원인태그 분류 + 긴급 플래그 → 우선순위 점수식(빈도+임팩트) 적용 → output/classified_voc.csv, report_voc.html, 구글시트 3탭(분류결과/집계요약/URGENT) 출력</p>
+    </div>
+    <div style="background:#F9F9FA;border:1px solid #E7E8EB;border-radius:14px;padding:26px">
+      <div style="font-size:17px;font-weight:700;color:#A4A7B0;margin-bottom:12px">추가 테스트 기록 / 코드</div>
+      <p style="font-size:21px;font-weight:500;line-height:1.6;color:#40414B;margin:0">점수식: 빈도(최대5)+임팩트(최대9, OEM+3/URGENT+3/제품결함+2/규제불안+1) → HIGH(8↑)/MEDIUM(5~7)/LOW(~4). 트러블슈팅: gspread v6 client.auth 제거→creds.service_account_email로 변경, Drive 저장 용량 한도(403)→사용자가 시트 생성 후 서비스 계정 편집자 공유 방식으로 전환. 44건 분류: 불만9(20.5%)·기능요청12(27.3%)·칭찬8(18.2%)·일반문의15(34.1%)</p>
+    </div>
+  </div>
+</section></div></div>
+
+</div>
+<script>
+  function fitDeck(){
+    document.querySelectorAll('.frame').forEach(function(f){
+      var s = f.clientWidth / 1920;
+      f.querySelector('.scale').style.transform = 'scale(' + s + ')';
+      f.style.height = (1080 * s) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitDeck);
+  fitDeck();
+</script>
+</body>
+</html>
