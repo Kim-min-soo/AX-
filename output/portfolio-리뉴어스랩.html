@@ -71,16 +71,17 @@
   .pagefoot .brandmark .dot{width:6px;height:6px;border-radius:50%;background:var(--brand)}
 
   /* ============ COVER ============ */
-  .slide.cover{ background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dk) 100%); color:#f3f1ea; padding:64px 76px; }
+  .slide.cover{ background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dk) 100%); color:#f3f1ea; padding:64px 76px;
+    display:flex; flex-direction:column; justify-content:center; }
   .slide.cover::after{content:"";position:absolute;right:-120px;top:-140px;width:440px;height:440px;border-radius:50%;
     background:radial-gradient(circle,rgba(255,255,255,.08),transparent 68%)}
   .slide.cover::before{content:"";position:absolute;left:-90px;bottom:-140px;width:340px;height:340px;border-radius:50%;
     background:radial-gradient(circle,rgba(143,214,168,.10),transparent 70%)}
   .cover-eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
-    background:rgba(255,255,255,.14);padding:6px 14px;border-radius:20px;margin-bottom:26px}
-  .cover h1{font-size:42px;line-height:1.4;font-weight:800;letter-spacing:-.3px;text-wrap:balance;
-    max-width:16ch;margin-bottom:18px}
-  .cover-sub{font-size:15.5px;color:#cfe0d4;max-width:46ch;margin-bottom:44px;line-height:1.7;text-wrap:pretty}
+    background:rgba(255,255,255,.14);padding:6px 14px;border-radius:20px;margin-bottom:30px}
+  .cover h1{font-size:60px;line-height:1.32;font-weight:800;letter-spacing:-.5px;text-wrap:balance;
+    max-width:16ch;margin-bottom:24px}
+  .cover-sub{font-size:19px;color:#cfe0d4;max-width:42ch;margin-bottom:0;line-height:1.7;text-wrap:pretty}
   .cover-sub b{color:#fff}
   .hero-impact{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
     background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:26px 30px;max-width:760px}
@@ -118,17 +119,23 @@
 
   /* ============ FLOW ============ */
   .flow-steps{display:flex;flex-direction:column}
-  .flow-step{display:flex;gap:16px;align-items:flex-start;padding:9px 0}
-  .flow-step .dot{width:11px;height:11px;border-radius:50%;background:var(--brand);margin-top:6px;flex-shrink:0;
+  .flow-step{display:flex;gap:18px;align-items:flex-start;padding:11px 0}
+  .flow-step .dot{width:12px;height:12px;border-radius:50%;background:var(--brand);margin-top:6px;flex-shrink:0;
     box-shadow:0 0 0 4px var(--brand-soft)}
-  .flow-step .txt{font-size:14.5px;color:var(--ink-soft)}
+  .flow-step .txt{font-size:16.5px;color:var(--ink-soft)}
   .flow-step .txt b{color:var(--ink)}
-  .flow-line{width:2px;background:var(--line);margin-left:5px;height:10px}
+  .flow-line{width:2px;background:var(--brand);opacity:.4;margin-left:5px;height:12px}
 
   /* ============ DECISION ============ */
   .decision{background:#fffaf0;border:1px solid #ecd9b4;border-radius:12px;padding:16px 20px}
-  .decision .before{color:#96603a;font-size:12.5px;margin-bottom:7px;font-weight:600}
-  .decision .after{color:#2b3b31;font-size:13.5px;line-height:1.55}
+  .decision .before{color:#96603a;font-size:13.5px;margin-bottom:0;font-weight:600;line-height:1.5}
+  .decision .before .n{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#c48a4a;
+    padding:1px 7px;border-radius:5px;margin-right:7px;vertical-align:1px}
+  .decision .divider{border-top:1px solid #ecd9b4;margin:12px 0}
+  .decision .after{color:#2b3b31;font-size:14.5px;line-height:1.6}
+  .decision ul.after-list{margin:0 0 0 16px;padding:0}
+  .decision ul.after-list li{font-size:13.5px;color:#2b3b31;line-height:1.55;margin-bottom:5px}
+  .decision ul.after-list li:last-child{margin-bottom:0}
   .decision .after b{color:var(--brand)}
 
   /* ============ TABLE ============ */
@@ -148,7 +155,7 @@
   .retro-card .card-title{opacity:.75}
   .retro-card.good .card-title{color:var(--brand);opacity:1}
   .retro-card ul{margin-left:18px}
-  .retro-card li{font-size:13.5px;color:var(--ink-soft);margin-bottom:7px}
+  .retro-card li{font-size:14.5px;color:var(--ink-soft);margin-bottom:9px}
 
   pre.formula{background:#efece2;border-radius:10px;padding:16px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:12.5px;line-height:1.85;color:#33362e}
@@ -162,7 +169,7 @@
   .story-col:first-child{padding-left:0}
   .story-col:last-child{padding-right:0}
   .story-col:not(:first-child){border-left:1px solid var(--line)}
-  .story-label{font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+  .story-label{font-size:19px;font-weight:800;letter-spacing:.2px;color:var(--brand);margin-bottom:12px}
   .story-quote{font-size:14px;color:var(--ink-soft);line-height:1.75}
   .story-quote::before{content:"\201C";color:var(--brand);font-size:20px;font-weight:800;margin-right:1px}
   .story-cite{display:block;margin-top:10px;font-size:11px;color:var(--muted)}
@@ -176,12 +183,41 @@
   .demo-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft);
     background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 15px}
 
+  /* ============ NARRATIVE FLOW (problem -> solution -> impact) ============ */
+  .narrative-flow{display:flex;align-items:center;gap:26px;margin:34px 0 24px}
+  .narrative-col{flex:1}
+  .narrative-arrow{font-size:26px;color:var(--brand);flex-shrink:0}
+  .impact-banner{background:var(--brand-soft);border-radius:16px;padding:26px 32px}
+  .impact-banner-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  .impact-stat-box{background:var(--card);border-radius:12px;padding:20px 18px;text-align:center}
+  .impact-stat-box b{font-size:30px;font-weight:800;color:var(--brand);display:block;line-height:1.15;font-variant-numeric:tabular-nums}
+  .impact-stat-box span{font-size:12.5px;color:var(--muted);margin-top:6px;display:block}
+  .impact-banner-src{position:absolute;right:12px;bottom:10px;font-size:9.5px;color:#a9b3ad}
+
+  .impact-list{margin:0 0 0 18px;padding:0}
+  .impact-list li{margin-bottom:20px}
+  .impact-list li:last-child{margin-bottom:0}
+  .impact-list li::marker{color:var(--brand);font-size:1.15em}
+  .notion-quote{background:none;border-radius:0;border-left:3px solid var(--ink);padding:2px 0 2px 18px;
+    font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:26px}
+
+  .chip-flow{display:flex;flex-wrap:wrap;align-items:flex-end;gap:0;margin-top:10px}
+  .chip-step{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .chip-step .chip-label{font-size:9.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+  .chip{display:inline-block;font-size:12.5px;font-weight:700;padding:8px 14px;
+    background:#fff;border:1px solid var(--line);border-bottom:2px solid var(--ink-soft);color:var(--ink-soft);white-space:nowrap}
+  .chip.gold{border-bottom-color:var(--gold);color:#8a5a1f}
+  .chip.red{border-bottom-color:var(--red);color:var(--red)}
+  .chip.brown{border-bottom-color:#8a3d5c;color:#8a3d5c}
+  .chip.brand{border-bottom-color:var(--brand);color:var(--brand)}
+  .chip-arrow{color:#c9a89f;font-size:13px;flex-shrink:0;padding:0 8px;margin-bottom:11px}
+
   /* ============ PLAIN PAGE TITLE ============ */
-  .page-title{display:flex;align-items:baseline;gap:14px;margin-bottom:28px}
-  .page-title .num{font-size:12.5px;font-weight:800;letter-spacing:.4px;color:#fff;
+  .page-title{display:flex;align-items:baseline;gap:14px;margin-bottom:36px}
+  .page-title .num{font-size:14.5px;font-weight:800;letter-spacing:.4px;color:#fff;
     background:var(--brand);padding:4px 11px;border-radius:6px;flex-shrink:0}
-  .page-title .ko{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
-  .page-title .en{font-size:13px;font-weight:600;color:var(--muted)}
+  .page-title .ko{font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+  .page-title .en{font-size:15px;font-weight:600;color:var(--muted)}
   .closing-contact{margin-top:40px;font-size:13px;color:var(--muted);letter-spacing:.2px}
 </style>
 </head>
@@ -190,47 +226,37 @@
 
   <!-- ================= SLIDE 1 · COVER ================= -->
   <div class="slide cover">
-    <span class="cover-eyebrow">Portfolio · AX 해커톤 [01] 리뉴어스랩</span>
+    <span class="cover-eyebrow">스파르타 AX 해커톤 [01] 리뉴어스랩</span>
     <h1>쌓이는 VoC,<br>인사이트는 편하게</h1>
-    <p class="cover-sub">CS팀이 매달 손으로 정리하던 VoC를, CSV 한 장으로 분류·인사이트·기획안까지 자동 완성하는 파이프라인</p>
-    <div class="hero-impact">
-      <span class="n1">210분</span><span class="arrow">→</span><span class="n2">20분</span>
-      <span class="impact-lbl">월간 VoC 처리 시간<br>※추정치</span>
-      <span class="badge">약 90% 단축</span>
-    </div>
-    <div class="cover-meta">
-      <span>📄 output/report_voc.html</span>
-      <span>📊 44건 분류 · 긴급 2건 자동 감지</span>
-      <span>🏷 CSRD · CBAM 컨텍스트</span>
-    </div>
-    <div class="cover-contact">김민수 &nbsp;·&nbsp; 010-5646-0905 &nbsp;·&nbsp; msoo5880@gmail.com</div>
+    <p class="cover-sub">김민수 <span style="color:#bcd4c4">[ 데이터 분석 / PM / 마케터 ]</span></p>
+    <div class="cover-contact">📞 010-5646-0905 &nbsp;·&nbsp; ✉️ msoo5880@gmail.com</div>
   </div>
 
   <!-- ================= SLIDE 2 · 01 EXECUTIVE SUMMARY ================= -->
-  <div class="slide">
+  <div class="slide" style="display:flex;flex-direction:column">
     <div class="page-title"><span class="num">01</span><span class="ko">한 장 요약</span><span class="en">Executive Summary</span></div>
 
-    <div class="story-row">
-      <div class="story-col">
-        <div class="story-label">받은 문제</div>
-        <p class="story-quote">고객사 VoC를 유형별로 분류하고, 탄소규제(CSRD·CBAM) 맥락에서 의미 있는 인사이트를 도출하라.<span class="story-cite">— 리뉴어스랩 미션 원문</span></p>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:60px">
+      <div class="narrative-flow" style="margin:0 0 56px">
+        <div class="narrative-col">
+          <div class="story-label">받은 문제</div>
+          <p class="story-quote">고객사 VoC를 유형별로 분류하고, 탄소규제(CSRD·CBAM) 맥락에서 의미 있는 인사이트를 도출하라.<span class="story-cite">— 리뉴어스랩 미션 원문</span></p>
+        </div>
+        <div class="narrative-arrow">→</div>
+        <div class="narrative-col">
+          <div class="story-label">만든 것</div>
+          <p class="story-text">CSV 한 장만 넣으면 분류·인사이트·개선 기획안·구글시트 기입까지, 사람 개입 없이 끝나는 파이프라인.</p>
+        </div>
       </div>
-      <div class="story-col">
-        <div class="story-label">만든 것</div>
-        <p class="story-text">CSV 한 장만 넣으면 분류·인사이트·개선 기획안·구글시트 기입까지, 사람 개입 없이 끝나는 파이프라인.</p>
-      </div>
-      <div class="story-col">
-        <div class="story-label">핵심 임팩트</div>
-        <div class="story-stat"><b>44건 중 2건</b><span>긴급 자동 감지</span></div>
-        <div class="story-stat"><b>3 + 2</b><span>규제 인사이트 · 개선 기획안</span></div>
-        <p class="story-sub">시간 임팩트(210→20분)는 표지 참조</p>
-      </div>
-    </div>
 
-    <div class="demo-row">
-      <span class="demo-pill">📄 분류 리포트 <code class="inline" style="background:none;padding:0;color:inherit">report_voc.html</code></span>
-      <span class="demo-pill">📊 구글스프레드시트 연동 결과</span>
-      <span class="demo-pill">🗂 원본 VoC 데이터 <code class="inline" style="background:none;padding:0;color:inherit">voc.csv</code></span>
+      <div class="impact-banner">
+        <div class="story-label" style="margin-bottom:0">남긴 성과</div>
+        <div class="impact-banner-stats">
+          <div class="impact-stat-box" style="position:relative"><b>2/44</b><span>긴급 자동 감지</span><span class="impact-banner-src">(voc.csv)</span></div>
+          <div class="impact-stat-box"><b>3개</b><span>규제 인사이트</span></div>
+          <div class="impact-stat-box"><b>2개</b><span>개선 기획안</span></div>
+        </div>
+      </div>
     </div>
 
     <div class="pagefoot">
@@ -242,23 +268,30 @@
   <!-- ================= SLIDE 3 · 02 문제 이해 ================= -->
   <div class="slide">
     <div class="page-title"><span class="num">02</span><span class="ko">문제 이해</span><span class="en">Understanding the Problem</span></div>
-    <p class="lede" style="margin-bottom:30px">"VoC를 4가지로 나누는 문제"가 아니라, <strong>매달 CS팀장·제품 PM에게 "지금 뭘 해야 하는가"를 전달하는 문제</strong>로 재정의했다.</p>
 
-    <div class="kpi-row" style="margin-bottom:20px">
-      <div class="kpi"><div class="num">150분</div><div class="lbl">건당 분류·입력<br>(30건 × 5분)</div></div>
-      <div class="kpi"><div class="num">60분</div><div class="lbl">월말 집계 +<br>인사이트 도출</div></div>
-      <div class="kpi"><div class="num">210분</div><div class="lbl">CS팀장 1명,<br>월 반나절 소요</div></div>
+    <div class="story-label">기업의 '진짜 문제'</div>
+    <blockquote class="brand" style="font-size:15px;margin-bottom:22px">현재 VoC 관리자는 <strong>'수작업으로' 엑셀에 정리</strong>하고 있어 유형별 패턴 파악이 어렵고, 비즈니스 의사결정에 활용하지 못하고 있다.</blockquote>
+
+    <div class="story-label">이 문제를 겪는 사람</div>
+    <div class="split3" style="margin-bottom:10px">
+      <div class="card">
+        <div class="card-title" style="color:var(--brand)">CS팀 실무자</div>
+        <p class="story-quote" style="font-size:12.5px;margin-bottom:0">매달 반나절씩 엑셀에 옮겨 적는 거, 이제 그만하고 싶어요. 어떤 유형이 많은지 한눈에 보고 싶어요!</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--brand)">PM (카본링크)</div>
+        <p class="story-quote" style="font-size:12.5px;margin-bottom:0">불만이랑 기능요청이 뒤섞여 있어서 뭐부터 고쳐야 할지 모르겠어요. 우선순위 근거가 필요해요!</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--brand)">경영진 · 대표</div>
+        <p class="story-quote" style="font-size:12.5px;margin-bottom:0">CBAM·CSRD 대응, 잘하고 있는지 보고할 데이터가 없어요. 리스크 신호를 미리 알고 싶어요!</p>
+      </div>
     </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:0">→ 세 그룹 모두 '같은 원인(수작업 정리)'으로 서로 다른 손해를 보고 있어, 이 셋을 문제의 당사자로 정의했다.</p>
 
-    <div class="split2">
-      <div class="card">
-        <div class="card-title" style="color:var(--brand)">이번에 푼 것</div>
-        <p style="margin-bottom:0;font-size:13px">CSV 정제 · 4유형+15소분류+5원인태그 분류 · 긴급 건 자동 플래그 · 규제 캘린더 연동 인사이트 · 우선순위 점수 기반 기획안 · 구글시트 자동 기입</p>
-      </div>
-      <div class="card">
-        <div class="card-title">의도적으로 안 푼 것</div>
-        <p style="margin-bottom:0;font-size:13px">채널(이메일·채널톡·미팅) 자동 통합, 실시간 처리, 월별 트렌드 자동 비교 — 다음 스텝으로 명시적으로 미룸</p>
-      </div>
+    <div class="impact-banner" style="margin-top:22px;text-align:center;padding:28px 32px">
+      <div class="story-label" style="margin-bottom:10px;text-align:center">그들이 공통적으로 원하는 것</div>
+      <div style="font-size:24px;font-weight:800;color:var(--brand);letter-spacing:-.2px">"수작업 없이, 패턴이 한눈에 보이는 시스템"</div>
     </div>
 
     <div class="pagefoot">
@@ -268,39 +301,23 @@
   </div>
 
   <!-- ================= SLIDE 4 · 03 해결 접근 & 의사결정 (흐름) ================= -->
-  <div class="slide">
+  <div class="slide" style="display:flex;flex-direction:column">
     <div class="page-title"><span class="num">03</span><span class="ko">해결 접근 & 의사결정</span><span class="en">Approach & Decisions</span></div>
-    <p class="lede">"이번 달만 잘 분류"가 아니라 "매달 CSV만 바꿔 끼우면 동일 품질이 나오는 구조"가 목표 — 기준은 <code class="inline">decisions.md</code>에, 코드는 그 문서를 따라간다.</p>
+    <div class="story-label">이 파이프라인의 목표</div>
+    <blockquote class="brand" style="font-size:22px;font-weight:800;color:var(--brand);line-height:1.5;margin-bottom:0;padding:22px 26px">데이터가 다르더라도, 동일한 품질이 나오는 구조</blockquote>
 
-    <div class="flow-steps">
-      <div class="flow-step"><div class="dot"></div><div class="txt"><b>CSV 업로드</b> → 날짜·중복·결측 자동 정리</div></div>
-      <div class="flow-line"></div>
-      <div class="flow-step"><div class="dot"></div><div class="txt">문의 내용을 읽고 <b>4유형(불만/기능요청/칭찬/일반문의) + 세부 원인</b> 분류</div></div>
-      <div class="flow-line"></div>
-      <div class="flow-step"><div class="dot"></div><div class="txt">지금 <b>규제 일정(CBAM 마감 등)</b>과 겹치는 부분이 있는지 자동 대조</div></div>
-      <div class="flow-line"></div>
-      <div class="flow-step"><div class="dot"></div><div class="txt">CS팀·제품팀이 봐야 할 <b>인사이트 3개 + 개선 우선순위 2건</b> 자동 작성</div></div>
-      <div class="flow-line"></div>
-      <div class="flow-step"><div class="dot" style="background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)"></div><div class="txt"><b>구글시트에 색깔 입혀서 자동 기입</b> (긴급 건은 별도 탭)</div></div>
-    </div>
-
-    <div class="split3" style="margin:16px 0 14px">
-      <div class="card" style="padding:14px 16px">
-        <div class="card-title">4유형</div>
-        <p style="margin-bottom:0;font-size:12.5px">불만 · 기능 요청 · 칭찬 · 일반 문의</p>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+      <div class="flow-steps">
+        <div class="flow-step"><div class="dot"></div><div class="txt"><b>CSV 업로드</b> → 날짜·중복·결측 자동 전처리</div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="dot"></div><div class="txt">문의 내용을 읽고 <b>4유형(불만/기능요청/칭찬/일반문의) + 세부 원인</b> 분류</div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="dot"></div><div class="txt">지금 <b>규제 일정(CBAM 마감 등)</b>과 겹치는 부분이 있는지 자동 대조</div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="dot"></div><div class="txt"><b>규제 인사이트 3개</b>(경영진·대표용) + <b>개선 우선순위 2건</b>(PM용) 자동 작성</div></div>
+        <div class="flow-line"></div>
+        <div class="flow-step"><div class="dot" style="background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)"></div><div class="txt"><b>구글시트에 유형별 배경색을 입혀 자동 기입</b> (불만=빨강, 기능요청=파랑 등 · 긴급 건은 별도 탭)</div></div>
       </div>
-      <div class="card" style="padding:14px 16px">
-        <div class="card-title">15소분류 (예시)</div>
-        <p style="margin-bottom:0;font-size:12.5px">불만 → 시스템오류 / 계산오류 / 기능제한 / 연동오류</p>
-      </div>
-      <div class="card" style="padding:14px 16px">
-        <div class="card-title">5원인태그</div>
-        <p style="margin-bottom:0;font-size:12.5px">규제불안 · 제품결함 · 사용법미숙 · 기한임박 · 원인불명</p>
-      </div>
-    </div>
-
-    <div class="callout">
-      <b>가장 중요했던 지점</b> — 코드를 모르는 CS팀장도 쓸 수 있어야 한다고 판단해 <code class="inline">HOW_TO_USE.md</code> 가이드를 제작. 폴더명의 <code class="inline">[01]</code>이 PowerShell에서 명령 패턴으로 오인되는 문제를 <code class="inline">Set-Location -LiteralPath</code>로 해결했다. <span style="color:#8a7550">(Python + gspread/google-auth 기반 구글시트 자동 기입)</span>
     </div>
 
     <div class="pagefoot">
@@ -310,35 +327,49 @@
   </div>
 
   <!-- ================= SLIDE 5 · 03 해결 접근 & 의사결정 (판단) ================= -->
-  <div class="slide">
+  <div class="slide" style="display:flex;flex-direction:column">
     <div class="page-title"><span class="num">03</span><span class="ko">해결 접근 & 의사결정</span><span class="en">Approach & Decisions</span></div>
-    <p class="lede">실제 데이터 앞에서 기준이 무너진 지점을 찾아 교정한 두 가지 결정</p>
 
-    <div class="split2" style="margin-bottom:16px">
-      <div class="decision">
-        <div class="before">❌ 처음 시도 — 기획안 선정 = "불만 건수 1위 + 기능요청 건수 1위"</div>
-        <div class="after">→ 실제로 급한 것(OEM 시스템 오류, 2건)보다 <b>건수만 많은 것(4건)</b>이 뽑히는 역설 발견. 건수·OEM 여부·긴급 여부·결함 여부를 합산한 <b>점수제</b>로 교체.
-          <code class="inline" style="display:inline-block;margin-top:6px">점수 = 빈도(≤5) + OEM(+3) + URGENT(+3) + 결함(+2) + 규제불안(+1)</code>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px">
+      <div class="split3">
+        <div class="decision" style="padding:22px 24px">
+          <div class="before"><span class="n">01</span>코드를 모르는 직원은 파이프라인을 실행하는 데 어려움을 겪지 않을까?</div>
+          <div class="divider"></div>
+          <ul class="after-list"><li><code class="inline">HOW_TO_USE.md</code> 가이드 제작 — 복사·붙여넣기만 하면 실행되도록</li></ul>
+        </div>
+        <div class="decision" style="padding:22px 24px">
+          <div class="before"><span class="n">02</span>단순 키워드 매칭 규칙만으로는 애매한 문의를 정확히 못 나누지 않을까?</div>
+          <div class="divider"></div>
+          <ul class="after-list"><li>Few-shot 프롬프팅으로 VoC를 4유형·15소분류로 나누는 기준을 미리 정의해 학습시킨 뒤 분류</li></ul>
+        </div>
+        <div class="decision" style="padding:22px 24px">
+          <div class="before"><span class="n">03</span>모든 행을 다 읽어야만 '진짜 급한 건'을 알 수 있는 건 아닐까?</div>
+          <div class="divider"></div>
+          <ul class="after-list"><li><b style="color:var(--red)">"마감·반려·긴급"</b> 등 키워드가 포함된 문의를 자동으로 <code class="inline">URGENT</code> 플래그 처리</li></ul>
         </div>
       </div>
-      <div class="decision">
-        <div class="before">❌ 처음 시도 — "불만이냐 문의냐"만 보면 긴급도 판단 가능</div>
-        <div class="after">→ "CBAM 신고 마감을 놓친 문의"는 유형상 일반 문의지만 대응 속도는 불만보다 급함. <b>유형 분류와 긴급도를 별도 두 축</b>으로 분리.</div>
+
+      <div class="split2">
+        <div class="decision" style="padding:22px 24px">
+          <div class="before"><span class="n">04</span>VoC마다 임팩트가 다른데, 똑같이 취급해도 될까?</div>
+          <div class="divider"></div>
+          <ul class="after-list">
+            <li>OEM 고객 +3점 — 계약 금액 최대 세그먼트, 이탈 시 매출 타격 가장 큼</li>
+            <li>URGENT 건 +3점 — 최대한 빨리 대응해야 하는 당일 에스컬레이션 대상</li>
+            <li>제품결함 +2점 — 같은 문제가 다른 고객에게도 잠재해 있음</li>
+            <li>규제불안 +1점 — 외부 요인이라 상대적으로 긴급도는 낮음</li>
+          </ul>
+        </div>
+        <div class="decision" style="padding:22px 24px">
+          <div class="before"><span class="n">05</span>어떤 기획안부터 봐야 할지, 기준이 없는 거 아닐까?</div>
+          <div class="divider"></div>
+          <ul class="after-list">
+            <li>빈도 점수 — (소분류 건수 / 전체 건수 × 10), 최대 5점을 넘지 않게 제한</li>
+            <li>빈도 점수 + 임팩트 점수(최대 9점)를 더해 <b style="color:var(--red)">HIGH</b>(8점 이상) · <b style="color:var(--gold)">MEDIUM</b>(5~7점) · <b style="color:var(--brand)">LOW</b>(4점 이하)로 우선순위를 매긴다</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="split2">
-      <div class="card">
-        <span class="tag ai">AI(Claude)에게 맡긴 것</span>
-        <p style="margin-bottom:0;font-size:13.5px">44건 각각을 읽고 초기 유형·소분류를 판단하는 반복 작업, 규제 캘린더와 VoC 패턴을 대조한 인사이트 초안 작성</p>
-      </div>
-      <div class="card">
-        <span class="tag human">내가 직접 결정한 것</span>
-        <p style="margin-bottom:0;font-size:13.5px">4유형 판단 기준 자체, 기획안 선정 점수제 전환, 긴급도·유형 분리, 비기술직도 쓸 수 있는 실행 형태 설계</p>
-      </div>
-    </div>
-
-    <p style="margin:14px 0 0;font-size:12.5px;color:var(--muted)">분류 원칙 — 기존 것을 고쳐달라 = 불만 · 없는 것을 새로 만들어달라 = 기능 요청 <span style="color:#b9b3a3">(decisions.md D-04~D-10)</span></p>
 
     <div class="pagefoot">
       <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
@@ -349,25 +380,36 @@
   <!-- ================= SLIDE 6 · 04 산출물 & 실증 ================= -->
   <div class="slide">
     <div class="page-title"><span class="num">04</span><span class="ko">산출물 & 실증</span><span class="en">Deliverables</span></div>
-    <p class="lede">사람이 매번 새로 만들던 산출물이, 실행 한 번으로 동일한 품질로 나온다.</p>
+    <blockquote class="notion-quote">사람이 매번 새로 만들던 산출물이, 실행 한 번으로 동일한 품질로 나온다.</blockquote>
 
     <table style="margin-bottom:22px">
       <thead><tr><th>산출물</th><th>내용</th></tr></thead>
       <tbody>
-        <tr><td><code class="inline">report_voc.html</code></td><td>긴급 알림 → 통계 카드 → 유형 분포 → 전체 분류표 → 인사이트 3개 → 개선 기획안 2개</td></tr>
-        <tr><td>구글시트 연동</td><td>분류결과 / 집계요약 / URGENT 3개 탭 자동 기입, 유형별 색상 표시</td></tr>
-        <tr><td>원본 데이터</td><td>voc.csv (44건, 첨부)</td></tr>
+        <tr><td><code class="inline">report_voc.html</code></td><td>긴급 알림 → 통계 카드 → 유형 분포 · Cause Tag 분포 → 전체 분류표 → 인사이트 3개 → 개선 기획안 2개</td></tr>
+        <tr><td>구글 스프레드시트</td><td>분류결과 / 집계요약 / URGENT 3개 탭 자동 기입, 유형별 색상 표시</td></tr>
       </tbody>
     </table>
 
     <p class="card-title" style="margin-bottom:10px">실제 동작 1건 · 2026-05-11</p>
     <blockquote class="brand" style="margin-bottom:14px">
-      카본링크에서 출력한 CBAM 보고서가 EU 세관에서 반려됐습니다. 양식 문제인지 수치 문제인지 확인 부탁드립니다. 긴급합니다.
+      카본링크에서 출력한 CBAM 보고서가 EU 세관에서 <b style="color:#8a3d5c">반려됐습니다</b>. 양식 문제인지 수치 문제인지 확인 부탁드립니다. 긴급합니다.
       <cite>— OEM 고객, 이메일</cite>
     </blockquote>
     <div class="card" style="border-color:#eec5bd;background:var(--red-soft)">
       <div class="card-title" style="color:var(--red)">자동 출력</div>
-      <p style="margin-bottom:0;font-size:13.5px"><strong>불만 → 시스템오류 → 원인태그: 제품결함 → 긴급 플래그(Y)</strong> → 구글시트 URGENT 탭 자동 분리 → CS팀 당일 에스컬레이션 대상으로 리포트 최상단 노출</p>
+      <div class="chip-flow">
+        <div class="chip-step"><span class="chip-label">유형 분류</span><span class="chip brown">불만</span></div>
+        <span class="chip-arrow">→</span>
+        <div class="chip-step"><span class="chip-label">소분류</span><span class="chip">시스템오류</span></div>
+        <span class="chip-arrow">→</span>
+        <div class="chip-step"><span class="chip-label">원인태그</span><span class="chip gold">제품결함</span></div>
+        <span class="chip-arrow">→</span>
+        <div class="chip-step"><span class="chip-label">긴급 판정</span><span class="chip red">긴급(Y)</span></div>
+        <span class="chip-arrow">→</span>
+        <div class="chip-step"><span class="chip-label">시트 반영</span><span class="chip brand">URGENT 탭 자동 분리</span></div>
+        <span class="chip-arrow">→</span>
+        <div class="chip-step"><span class="chip-label">최종 결과</span><span class="chip brand">리포트 최상단 노출</span></div>
+      </div>
     </div>
 
     <div class="pagefoot">
@@ -377,42 +419,44 @@
   </div>
 
   <!-- ================= SLIDE 7 · 05 임팩트 ================= -->
-  <div class="slide">
+  <div class="slide" style="display:flex;flex-direction:column">
     <div class="page-title"><span class="num">05</span><span class="ko">임팩트</span><span class="en">Impact</span></div>
+    <blockquote class="notion-quote">각자 다르게 겪던 문제가, 사람별로 나뉜 숫자로 정리된다.</blockquote>
 
-    <table style="margin-bottom:16px">
-      <thead><tr><th>핵심 지표</th><th>Before</th><th>After</th></tr></thead>
-      <tbody>
-        <tr><td>월간 VoC 처리 시간</td><td>210분</td><td><b>약 20분</b></td></tr>
-        <tr><td>긴급 건 파악</td><td>44건 전부 읽어야 확인</td><td><b>자동 플래그로 즉시 노출</b></td></tr>
-        <tr><td>인사이트 도출</td><td>수작업 재구성, 근거 비체계적</td><td><b>규제 캘린더 대조 기반 자동 생성</b></td></tr>
-      </tbody>
-    </table>
-
-    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
-      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">9 · 20.5%</div><div class="lbl">불만</div></div>
-      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">12 · 27.3%</div><div class="lbl">기능 요청</div></div>
-      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">8 · 18.2%</div><div class="lbl">칭찬</div></div>
-      <div class="kpi" style="padding:14px 10px;border-top-color:var(--brand)"><div class="num" style="font-size:20px;color:var(--brand)">15 · 34.1%</div><div class="lbl">일반 문의</div></div>
-    </div>
-
-    <div class="split3" style="margin-bottom:14px">
-      <div class="retro-card good">
-        <div class="card-title">CS팀장</div>
-        <ul><li>"이번 달 뭐가 급한지"를 44건을 다 읽지 않고도 리포트 최상단에서 즉시 파악</li></ul>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-start">
+      <div class="split3" style="margin-bottom:16px">
+        <div class="retro-card good" style="padding:30px 26px">
+          <div class="card-title" style="font-size:14px">CS팀 실무자</div>
+          <p style="font-size:14.5px;color:var(--muted);margin-bottom:14px">"엑셀 정리 좀 그만하고 싶어요"</p>
+          <div style="border-top:1px solid var(--line);margin-bottom:18px"></div>
+          <ul class="impact-list">
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">44건 → 0건</b><div style="font-size:13px;color:var(--muted);margin-top:3px">수작업 엑셀 입력 (구글시트 자동 기입으로 대체)</div></li>
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">2 / 44건</b><div style="font-size:13px;color:var(--muted);margin-top:3px">URGENT 자동 감지</div></li>
+          </ul>
+        </div>
+        <div class="retro-card good" style="padding:30px 26px">
+          <div class="card-title" style="font-size:14px">PM (카본링크)</div>
+          <p style="font-size:14.5px;color:var(--muted);margin-bottom:14px">"우선순위 근거가 필요해요"</p>
+          <div style="border-top:1px solid var(--line);margin-bottom:18px"></div>
+          <ul class="impact-list">
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">2건</b><div style="font-size:13px;color:var(--muted);margin-top:3px">개선 기획안 (HIGH/MEDIUM/LOW 자동 산정)</div></li>
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">기능요청 +100% <span style="font-size:14px">(4건→8건)</span></b><div style="font-size:13px;color:var(--muted);margin-top:3px">전반기 대비 후반기, 로드맵 근거</div></li>
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">불만 100% <span style="font-size:14px">(9/9)</span></b><div style="font-size:13px;color:var(--muted);margin-top:3px">전건 제품결함, 계산오류 3건 포함</div></li>
+          </ul>
+        </div>
+        <div class="retro-card good" style="padding:30px 26px">
+          <div class="card-title" style="font-size:14px">경영진 · 대표</div>
+          <p style="font-size:14.5px;color:var(--muted);margin-bottom:14px">"리스크 신호를 미리 알고 싶어요"</p>
+          <div style="border-top:1px solid var(--line);margin-bottom:18px"></div>
+          <ul class="impact-list">
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">3개</b><div style="font-size:13px;color:var(--muted);margin-top:3px">규제 캘린더 연동 인사이트 자동 생성</div></li>
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">10건 · 22.7%</b><div style="font-size:13px;color:var(--muted);margin-top:3px">전체 중 CBAM 관련 VoC 비중</div></li>
+            <li><b style="font-size:22px;color:var(--brand);font-variant-numeric:tabular-nums">일반문의 +50% <span style="font-size:14px">(6건→9건)</span></b><div style="font-size:13px;color:var(--muted);margin-top:3px">전반기 대비 후반기, CBAM 마감 집중 신호</div></li>
+          </ul>
+        </div>
       </div>
-      <div class="retro-card good">
-        <div class="card-title">제품 PM</div>
-        <ul><li>건수가 아니라 OEM·긴급도·결함 여부를 반영한 우선순위 점수로 스프린트 후보를 받는다</li></ul>
-      </div>
-      <div class="retro-card good">
-        <div class="card-title">다음 담당자</div>
-        <ul><li>분류·경계 케이스 판단 근거가 문서로 누적되어, 담당자가 바뀌어도 그대로 이어받는다</li></ul>
-      </div>
-    </div>
 
-    <div class="callout">
-      <b>측정 방식 명시</b> — 210분→20분은 실측 타임로그가 아닌 <strong>추정치</strong>다. voc.csv 건수와 VoC 처리 실무를 근거로 단계별 역산했으며, 자동화 이후에도 "리포트 검토 15분"은 그대로 남겨 과장을 피했다. 실제 배포 시 CS팀 실측값으로 갱신 필요.
+      <p style="font-size:11px;color:var(--muted);margin:6px 0 0">측정 방식 명시 — 위 수치는 모두 voc.csv 44건과 파이프라인 실제 출력값을 그대로 집계</p>
     </div>
 
     <div class="pagefoot">
@@ -423,30 +467,34 @@
 
   <!-- ================= SLIDE 8 · 06 적용 가능성 & 아쉬움 & 비전 ================= -->
   <div class="slide">
-    <div class="page-title"><span class="num">06</span><span class="ko">적용 가능성 & 아쉬움 & 비전</span><span class="en">Applicability & Retrospective</span></div>
+    <div class="page-title"><span class="num">06</span><span class="ko">적용 가능성 & 아쉬움 & 다음 스텝</span><span class="en">Applicability & Retrospective</span></div>
 
-    <div class="split2" style="margin-bottom:16px">
+    <div class="split2" style="margin-bottom:28px">
       <div class="retro-card good">
-        <div class="card-title">적용 시 필요한 것</div>
-        <ul>
+        <div class="card-title" style="font-size:14px">적용 시 필요한 것</div>
+        <ul style="font-size:14.5px">
           <li>매달 CS팀이 이메일·채널톡·미팅메모를 하나의 CSV로 정리하는 습관</li>
           <li>구글 스프레드시트 서비스 계정 공유 설정 (최초 1회)</li>
           <li>규제 일정 변경 시 <code class="inline">reg-calendar.md</code> 업데이트 (PM)</li>
         </ul>
       </div>
       <div class="retro-card gap">
-        <div class="card-title">아쉬운 점</div>
-        <ul>
-          <li>핵심 임팩트 수치(210→20분)가 실측이 아닌 추정치</li>
-          <li>새 소분류·긴급 표현은 사람이 수동 업데이트 — 완전 자동화가 아닌 반자동화</li>
-          <li>월별 트렌드 비교는 미지원 — 현재는 단일 기간 스냅샷까지</li>
+        <div class="card-title" style="font-size:14px">아쉬운 점</div>
+        <ul style="font-size:14.5px">
+          <li>표본이 44건으로 적어, 비율·추이 인사이트의 통계적 유의성은 제한적</li>
+          <li>새 소분류·긴급 표현은 사람이 수동 업데이트</li>
+          <li>트렌드 비교는 미지원 — 현재는 단일 기간 스냅샷까지</li>
         </ul>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">다음 스텝</div>
-      <p style="margin-bottom:0;font-size:13.5px">CS팀 실측 데이터로 임팩트 수치 검증 → 월별 CSV 누적으로 트렌드 비교 인사이트 추가 → 규제 캘린더 변경 알림 자동화</p>
+      <div class="card-title" style="font-size:14px">다음 스텝</div>
+      <ul style="font-size:14.5px;color:var(--ink-soft);margin:0 0 0 18px;padding:0">
+        <li style="margin-bottom:6px">CS팀 실측 데이터로 임팩트 수치 검증</li>
+        <li style="margin-bottom:6px">월별 CSV 누적으로 트렌드 비교 인사이트 추가</li>
+        <li>규제 캘린더 변경 알림 자동화</li>
+      </ul>
     </div>
 
     <div class="pagefoot">
@@ -456,18 +504,21 @@
   </div>
 
   <!-- ================= SLIDE 9 · 07 마무리 ================= -->
-  <div class="slide" style="display:flex;flex-direction:column;justify-content:center">
+  <div class="slide" style="display:flex;flex-direction:column">
     <div class="page-title"><span class="num">07</span><span class="ko">마무리</span><span class="en">Closing</span></div>
 
-    <blockquote class="brand" style="font-size:15px;line-height:1.8;max-width:74ch;margin-bottom:20px">
-      이 파이프라인을 정식으로 맡게 된다면, 지금은 월 단위 스냅샷으로 멈춰 있는 분석을 트렌드 비교까지 확장하고 CS팀 실측 데이터로 임팩트 수치를 검증된 값으로 바꿔나가고 싶다.
-    </blockquote>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding-bottom:70px">
+      <div style="font-size:38px;font-weight:800;color:var(--brand);line-height:1.5;max-width:32ch;letter-spacing:-.3px">
+        쌓이는 VoC를,<br>실행 한 번으로 끝나는 인사이트로 바꿉니다
+      </div>
+      <p style="font-size:13px;color:var(--muted);max-width:60ch;line-height:1.75;margin-bottom:0">
+        파이프라인을 직접 기획하고 가동할 수 있는 능력으로 기여하겠습니다.<br>여기까지 봐주셔서 감사합니다.
+      </p>
+    </div>
 
-    <p style="font-size:14px;max-width:72ch;line-height:1.85;margin-bottom:0">
-      이전에 무신사 리뷰 데이터로 고객 VoC를 유형별로 분석해본 경험 덕분에, 이 문제를 비교적 빠르게 풀 수 있었다. "고객의 말을 몇 가지 기준으로 나누는 것"보다 "그 기준이 흔들리는 경계 케이스를 어떻게 처리할지 원칙을 세우는 것"이 VoC 분석의 진짜 난이도라는 걸 그 경험에서 미리 알고 있었고, 그래서 이번에도 분류 기준과 경계 케이스 처리 원칙을 문서로 먼저 고정하는 데 시간을 많이 썼다.
-    </p>
-
-    <div class="closing-contact">감사합니다 &nbsp;·&nbsp; 김민수 &nbsp;·&nbsp; 010-5646-0905 &nbsp;·&nbsp; msoo5880@gmail.com</div>
+    <div style="position:absolute;right:76px;bottom:58px;text-align:right;font-size:12px;color:var(--muted);letter-spacing:.2px">
+      김민수 &nbsp;·&nbsp; 010-5646-0905 &nbsp;·&nbsp; msoo5880@gmail.com
+    </div>
 
     <div class="pagefoot">
       <span class="brandmark"><span class="dot"></span>Renewers Lab · VoC Pipeline</span>
